@@ -4,15 +4,38 @@ import { Link } from 'react-router-dom'
 import Repos from "../repos/Repos"
 
 export class user extends Component {
-    componentDidMount() {
-        this.props.getUser(this.props.match.params.login)
+    state = {
+        fetchedUser: false,
+        page: 1
     }
+
+    componentDidMount() {
+        this.props.getUser(this.props.match.params.login);
+        this.props.getUserRepos(this.props.match.params.login, this.state.page);
+    }
+
+    handleButtonClickNext = () => {
+        this.setState(prevState => ({ page: prevState.page + 1 }), () => {
+            this.props.getUser(this.props.match.params.login, this.state.page);
+            this.props.getUserRepos(this.props.match.params.login, this.state.page);
+        });
+    }
+
+    handleButtonClickBack = () => {
+        if (this.state.page !== 1) {
+            this.setState(prevState => ({ page: prevState.page - 1 }), () => {
+                this.props.getUser(this.props.match.params.login, this.state.page);
+                this.props.getUserRepos(this.props.match.params.login, this.state.page);
+            })
+        }
+    }
+
+
     render() {
-        console.log(this.props.user)
         const { name, avatar_url, location, bio, blog, login, html_url, followers, following, public_repos, public_gists, hireable, company } = this.props.user
-        // const { loading, repos } = this.props
-        // console.log(repos)
-        // if (loading) { return <Spinner /> }
+        const { loading, repos } = this.props
+
+        if (loading) { return <Spinner /> }
 
         return (
 
@@ -47,11 +70,18 @@ export class user extends Component {
                 <div className="card text-center">
                     <div className="badge badge-primary">Followers: {followers}</div>
                     <div className="badge badge-success">following: {following}</div>
-                    {/* <div className="badge badge-light">Public Repos: {public_repos}</div> */}
+                    <div className="badge badge-light">Public Repos: {public_repos}</div>
                     <div className="badge badge-dark">public Gists: {public_gists}</div>
                 </div>
 
-                {/* <Repos repos={repos} /> */}
+                <div className='all-center'>
+                    <Repos repos={repos} />
+                    <div className='backPageNext text-center'>
+                        <button className='btn btn-light' onClick={this.handleButtonClickBack}> Back </button>
+                        <h4>Page: {this.state.page}</h4>
+                        <button className='btn btn-light' onClick={this.handleButtonClickNext}> Next </button>
+                    </div>
+                </div>
             </Fragment>
         )
     }

@@ -374,6 +374,12 @@ table th {
   margin-right: 0.6rem;
 }
 
+.backPageNext {
+  display: flex;
+  flex-direction: row;
+  
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .hide-sm {
@@ -409,6 +415,7 @@ table th {
     text-align: center;
     justify-content: center;
   }
+
 
   
 }

@@ -7,8 +7,9 @@ const Navbar = ({ icon, title }) => {
   return (
     <nav className="navbar bg-primary">
       <h1>
-        {icon && <i className={icon} />}
-        {title}
+        <Link to="/" style={{ color: "#FFF", textDecoration: "none" }}>
+          {icon && <i className={icon} />} {title}
+        </Link>
       </h1>
       <ul style={{ listStyleType: "none", margin: 0, padding: 0, overflow: "hidden" }}>
         <NavItem to="/" label="Home" />
