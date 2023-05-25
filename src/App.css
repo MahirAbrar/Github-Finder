@@ -2,11 +2,11 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #dc3545;
+  --primary-color: #DE9E36;
   --dark-color: #333333;
   --light-color: #f4f4f4;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
+  --danger-color: #D72638;
+  --success-color: #00A676;
 }
 
 * {
@@ -32,9 +32,7 @@ a:hover {
   color: #666;
 }
 
-ul {
-  list-style: none;
-}
+
 
 img {
   width: 100%;
@@ -411,4 +409,6 @@ table th {
     text-align: center;
     justify-content: center;
   }
+
+  
 }
